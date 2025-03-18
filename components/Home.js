@@ -26,21 +26,18 @@ export default function Home({navigation,route}){
       </TouchableOpacity>
       <View style={styles.jogos}>
       {jogos.map((item) => (
+  
         <View key={item.id} style={styles.jogo}>
+          <TouchableOpacity onPress={() => navigation.navigate("Jogo",{item})}>
           <Image source={item.imagem} style={ styles.image} />
+          </TouchableOpacity>
           <Text style={styles.nomeJogo}>{item.nome}</Text>
-          <Text>{item.descricao}</Text>
           <Text>{item.categoria} - {item.ano}</Text>
           <Text>Nota: {item.nota}</Text>
-          <TouchableOpacity
-            style={styles.favBtn}
-            onPress={() => toggleFavorito(item.id)}
-          >
-            
+          <TouchableOpacity style={styles.favBtn} onPress={() => toggleFavorito(item.id)}>
             <Text style={styles.btnText}>{favoritos.includes(item.id) ? "Remover dos Favoritos" : "Adicionar aos Favoritos"}</Text>
-            </TouchableOpacity>
+          </TouchableOpacity>
         </View>
-        
       ))}
       </View>
     </ScrollView>
