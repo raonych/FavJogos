@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, Text, Button, Image, ScrollView,StyleSheet,TouchableOpacity } from "react-native";
+import React from "react";
+import { View, Text, Image, ScrollView,StyleSheet,TouchableOpacity } from "react-native";
 import Jogos from './jogos';
 export default function Favoritos({navigation,route}) {
 
@@ -7,12 +7,17 @@ export default function Favoritos({navigation,route}) {
  
     const jogos = Jogos;
 
+    const goBackWithUpdatedFavs = () => {
+      navigation.setParams({ favoritos });
+      navigation.goBack();  
+    };
+
   return (
     <View>
         <ScrollView style={styles.container}>
         <Text style={{ fontSize: 20, fontWeight: "bold", marginTop: 20 }}>Favoritos</Text>
 
-        <TouchableOpacity hitSlop={{ top: 100, bottom: 100, left: 100, right: 100 }} style={styles.nxtPage} onPress={() => navigation.navigate("Home")}>
+        <TouchableOpacity hitSlop={{ top: 100, bottom: 100, left: 100, right: 100 }} style={styles.nxtPage} onPress={() => goBackWithUpdatedFavs()}>
         <Text style={styles.nomeJogo} >Home</Text>
         </TouchableOpacity>
 

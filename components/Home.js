@@ -1,16 +1,13 @@
 import React, { useState } from "react";
-import { View, Text, Button, Image, ScrollView,StyleSheet,TouchableOpacity } from "react-native";
+import { View, Text, Image, ScrollView,StyleSheet,TouchableOpacity } from "react-native";
 import Jogos from './jogos';
 
 export default function Home({navigation,route}){
  
-  const [favoritos, setFavoritos] = useState([]);
-
-   if(route.params){
-    favoritos = route.params;
-  }
+  const [favoritos, setFavoritos] = useState(route.params?.favoritos || []);
 
   const jogos = Jogos;
+
   const toggleFavorito = (id) => {
     setFavoritos((prev) =>
       prev.includes(id) ? prev.filter((favId) => favId !== id) : [...prev, id]
@@ -32,6 +29,7 @@ export default function Home({navigation,route}){
         <View key={item.id} style={styles.jogo}>
           <Image source={item.imagem} style={ styles.image} />
           <Text style={styles.nomeJogo}>{item.nome}</Text>
+          <Text>{item.descricao}</Text>
           <Text>{item.categoria} - {item.ano}</Text>
           <Text>Nota: {item.nota}</Text>
           <TouchableOpacity
